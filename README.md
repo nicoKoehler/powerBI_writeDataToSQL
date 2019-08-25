@@ -9,6 +9,13 @@ This repo presents a hack how power can be used to write categorized discrete da
 + Microsoft Account and PowerBI Desktop installed
 
 
+## Files
++ published .py file: script to be run inside of pseudo graphs
++ data flow diagram
++ SQL table definitions
++ sample PBI Dashboard
+
+
 ## PseudoCode - Steps
 > Create a table or view from your base data
 
@@ -23,8 +30,12 @@ This repo presents a hack how power can be used to write categorized discrete da
 > in the R/Python visual, write a script that connects to a database and writes the selected attribute pulled from the slicer
 >> the script has to end with a pseudo plot, otherwise PowerBI will throw an error
 
+
+
 ## Example specifics
 This example contains two different inputs - a *name* variable and a *statement* variable. 
+
+
 
 ### The complication
 If more than 1 variable should be written, timing becomes an issue. Every time a slicer is changed (think: new value is selected) all scripts are executed. So if the variable *name* is selected, all scripts are triggered. This will cause *name* to be written correctly, but *statement* may not, as at the time of execution it was not set yet, so it will be empty when it is written. 
@@ -34,6 +45,8 @@ For instance, at first execution, a dummy line could be created in the target SQ
 
 The approach chosen for the uploaded example is as follows: 
 A dummy table holds a dummy line set to null. When a slicer is set and thus scripts are executed, they update the dummy line. Only when no NULL field is left, does the dummy line get written to the final target table. Concurrent users were not considered for the purpose of the example. 
+
+
 
 ### Known issues
 python specific packages may not work once the report is published. This may depend on the set up of your environment. 
